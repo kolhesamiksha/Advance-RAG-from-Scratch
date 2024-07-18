@@ -1,6 +1,6 @@
 from pymongo import MongoClient
 
-CONNECTION_STRING = "mongodb+srv://kolhesamiksha25:yRxcIbqRBJORdwFm@cluster0.p3zf3zw.mongodb.net/"
+CONNECTION_STRING = os.getenv('CONNECTION_STRING')
 
 def get_database(connection_string):
    client = MongoClient(connection_string)

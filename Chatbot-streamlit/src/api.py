@@ -13,7 +13,7 @@ from langchain_core.documents import Document
 from pymilvus import Collection, utility, AnnSearchRequest, RRFRanker, connections
 
 #Custom modules
-from utils.custom_utils import SparseFastEmbedEmbeddings, CustomMultiQueryRetriever
+from src.utils.custom_utils import SparseFastEmbedEmbeddings, CustomMultiQueryRetriever
 from langchain_core.callbacks import CallbackManagerForRetrieverRun
 
 # Reranker modules
@@ -24,6 +24,8 @@ from langchain_community.vectorstores import FAISS
 
 # LECL chain modules
 from langchain_core.runnables import RunnablePassthrough, RunnableLambda, RunnableParallel
+from langchain_core.prompts.prompt import PromptTemplate
+from langchain_core.prompts import BasePromptTemplate
 from langchain.callbacks import get_openai_callback
 from langchain_core.messages import HumanMessage, AIMessage
 from IPython.display import display, Markdown
@@ -32,20 +34,20 @@ from IPython.display import display, Markdown
 from fastapi import APIRouter, Response
 
 # schema
-from schema import PredictSchema
+from .schema import PredictSchema
 
 #mongo modules
-from utils.get_insert_mongo_data import format_creds_mongo
+from src.utils.get_insert_mongo_data import format_creds_mongo
 
 #Logutils
 import logging
-from utils.logutils import Logger
+from src.utils.logutils import Logger
 import traceback
 from datetime import datetime
 
 # st.set_option('global.cache.persist', True)
-current_datetime = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-logger = Logger(f'logs/frontend_logs_{current_datetime}.log')
+# current_datetime = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+# logger = Logger(f'logs/frontend_logs_{current_datetime}.log')
 
 rag_router = APIRouter()
 
@@ -62,6 +64,7 @@ DENSE_EMBEDDING_MODEL = "jinaai/jina-embeddings-v2-base-en"
 SPARSE_EMBEDDING_MODEL = "Qdrant/bm42-all-minilm-l6-v2-attentions"
 LLM_MODEL = "gpt-4o"
 TEMPERATURE = 0.0
+NO_HISTORY = 2
 langchain=True
 DENSE_SEARCH_PARAMS = {
     "index_type": "IVF_SQ8",
@@ -84,11 +87,10 @@ MASTER_PROMPT = """
         3. Make sure to address the user's queries politely.
         4. Compose a comprehensive reply to the query based on the CONTEXT given.
         5. Respond to the questions based on the given CONTEXT. 
-        6. Please refrain from inventing responses and kindly respond with "I apologize, but that falls outside of my current scope of knowledge." and DO NOT display any sources.
+        6. Please refrain from inventing responses and kindly respond with "I apologize, but that falls outside of my current scope of knowledge."
         7. Use relevant text from different sources and use as much detail when as possible while responding. Take a deep breath and Answer step-by-step.
         8. Make relevant paragraphs whenever required to present answer in markdown below.
-        9. Must Provide the Source below the answer like [Source: source name].
-        10. Do not provide RESPONSE in the starting of the answer.
+        9. MUST PROVIDE the Source Link below the answer like [Source: source_link].
         """
 
 def sparse_embedding_model(texts: List[str], embed_model):
@@ -209,7 +211,7 @@ def faiss_store_docs_to_rerank(docs_to_rerank):
     return retriever
 
 def Reranker(question, docs_to_rerank) -> List:
-    FlashrankRerank.update_forward_refs()
+    # FlashrankRerank.update_forward_refs()
     compressor = FlashrankRerank()
     retriever = faiss_store_docs_to_rerank(docs_to_rerank)
     compression_retriever = ContextualCompressionRetriever(
@@ -322,14 +324,13 @@ def advance_rag_chatbot(question, history):
     for query in expanded_queries:
         output = milvus_hybrid_search(question, expr="")
         combined_results.extend(output)
-    reranked_docs = Reranker(question, combined_results)
-    formatted_context = format_docs(reranked_docs)
+    # reranked_docs = Reranker(question, combined_results)
+    formatted_context = format_docs(combined_results[:5])
     response = chatbot(question, formatted_context, history)
     end_time = time.time() - st_time
     return (response, end_time)
 
 def chatbot(question, formatted_context, retrieved_history):
-    logger.info(f"Query: {question}")
 
     history = []
 

@@ -1,6 +1,6 @@
 from .mongo_init import get_database
 
-CONNECTION_STRING = "mongodb+srv://kolhesamiksha25:yRxcIbqRBJORdwFm@cluster0.p3zf3zw.mongodb.net/"
+CONNECTION_STRING = os.getenv('CONNECTION_STRING')
 
 def get_creds_from_mongo(connection_string):
     dbname = get_database(connection_string)

@@ -3,4 +3,4 @@ from typing import List, Tuple
 
 class PredictSchema(BaseModel):
     query: str
-    history: List[Tuple]
+    history: List[Tuple[str, str]] = []
