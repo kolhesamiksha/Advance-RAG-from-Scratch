@@ -89,12 +89,13 @@ This Application is Not yet deployed.. In-progress.
 Follow Below Instruction for smooth and Errorless Application Run
 **Setup the Virtual-env**
 
-    ```
+```
     conda create --name ragapp python=3.11.5
     conda activate ragapp
 
     cd Chatbot-streamlit/
     pip install -r requirements.txt
+```
 
 **Setup the API Backend**
 
@@ -115,15 +116,17 @@ Now /predict Endpoint of FastAPI is getting exposed, which can be used in out St
 
 2. Check the API working in swagger
 
-    ```
+```
     Click on the link e.g http://127.0.0.1:8000/docs to check the swagger
+```
 
 **Setup the Streamlit UI**
 
 To Run the Streamlit Application Locally Follow below Instructions to Run the App
 
-    ```
+```
     streamlit run app.py
+```
 
 This Will open a streamlit application where you can ask your questions and get the responses via API you exposed.
 
