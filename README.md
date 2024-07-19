@@ -4,7 +4,9 @@ An AI Assistant to help you solve Any Queries Regarding NVIDIA's CUDA Framework
 
 ## About
 
+This Application is able
 
+![advance-rag-workflow](https://github.com/user-attachments/assets/f66d9c12-5356-4b48-8a2e-1a4551181f57)
 
 ## Approach: RAG Workflow Stratergy
 
@@ -27,7 +29,7 @@ The approaches Followed for building RAG pipeline is discussed below
 7. **Reranking Techniques**:
 
 8. **LLM Model**:
-![advance-rag-workflow](https://github.com/user-attachments/assets/f66d9c12-5356-4b48-8a2e-1a4551181f57)
+
 
 ## Results
 
@@ -70,6 +72,7 @@ The approaches Followed for building RAG pipeline is discussed below
 ## TechStack
 
 - Python
+- MongoDB (Store API Secrets)
 - Generative AI
 - RAG Chatbot
 - Langchain
@@ -79,5 +82,50 @@ The approaches Followed for building RAG pipeline is discussed below
 
 ## How to Run the Application
 
+> Note: Code is builted and tested on python==^3.11.5
+
+This Application is Not yet deployed.. In-progress.
+
+Follow Below Instruction for smooth and Errorless Application Run
+1. **Setup the Virtual-env
+
+    ```
+    conda create --name ragapp python=3.11.5
+    conda activate ragapp
+
+    cd Chatbot-streamlit/
+    pip install -r requirements.txt
+
+**Setup the API Backend**
+To Run the Application Locally First Run the FastAPI backend. Follow Below **Instructions to Run the FastAPI**
+
+**Note: To add your credentials inside the Mongodb Atlas cloud to connect the application Refere: Chatbot-streamlit/src/utils/mongo_init.py
+
+1. Run the API
+    ```
+    #Export Envs: After insderting daa into mongodb atlas cloud
+    export CONNECTION_NAME=<chatbot-connection-name>
+
+    #Now Run the FastAPI using below command and Relative Path as Chatbot-streamlit/
+    uvicorn src.main:app --reload
+
+    
+Now /predict Endpoint of FastAPI is getting exposed, which can be used in out Streamlit app to do Q&A over RAG.
+
+2. Check the API working in swagger
+
+    ```
+    Click on the link e.g http://127.0.0.1:8000/docs to check the swagger
+
+**Setup the Streamlit UI**
+To Run the Streamlit Application Locally Follow below **Instructions to Run the App**
+
+    ```
+    streamlit run app.py
+
+This Will open a streamlit application where you can ask your questions and get the responses via API you exposed.
 
 ## Sample Output
+
+Contact Info:
+__Samiksha Kolhe__: https://www.linkedin.com/in/samiksha-kolhe25701/ 
