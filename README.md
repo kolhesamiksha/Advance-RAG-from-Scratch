@@ -27,9 +27,10 @@ After WeCrawling and Scraping data from the BaseURL. Applied various Techniques 
 
 2. **Semantic Chunking**: Semantic Chunking splits the data in between the sentences. Based in the similarity between the sentences it combines the sentences and split the data where similarity drops to an extend. It works on embedding Similarity between the Sentences. 
 
-2.1 **Statistical Chunking**: Better for English Text only. Instead of chunking text with a fixed chunk size, the semantic splitter adaptively picks the breakpoint in-between sentences using embedding similarity. This ensures that a "chunk" contains sentences that are semantically related to each other. For Semantic chunking used **jinaai/jina-embeddings-v2-base-en** (8K context length) by langchain FastEmbedding Module.
+- 2.1 **Statistical Chunking**: Better for English Text only. Instead of chunking text with a fixed chunk size, the semantic splitter adaptively picks the breakpoint in-between sentences using embedding similarity. This ensures that a "chunk" contains sentences that are semantically related to each other. For Semantic chunking used **jinaai/jina-embeddings-v2-base-en** (8K context length) by langchain FastEmbedding Module.
 
-2.2 **Rolling Window Spltting(Used in RAG)**: It uses a rolling window to consider splitting and applies semantic similarity while considering the sentence to combine and split. This Technique is more generic for any type of embeddding model, MAX_SPLI, MIN_SPLIT parameters makes it more customisable. Providing Chunks compatible to semantic chunking technique.
+
+- 2.2 **Rolling Window Spltting(Used in RAG)**: It uses a rolling window to consider splitting and applies semantic similarity while considering the sentence to combine and split. This Technique is more generic for any type of embeddding model, MAX_SPLI, MIN_SPLIT parameters makes it more customisable. Providing Chunks compatible to semantic chunking technique.
 
 #### 3. Metadata Chunking Method: 
 
