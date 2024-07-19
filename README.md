@@ -27,8 +27,7 @@ The approaches Followed for building RAG pipeline is discussed below
 7. **Reranking Techniques**:
 
 8. **LLM Model**:
-
-![RAG-workflow](advance-rag-workflow.PNG)
+![advance-rag-workflow](https://github.com/user-attachments/assets/f66d9c12-5356-4b48-8a2e-1a4551181f57)
 
 ## Results
 
