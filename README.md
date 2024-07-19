@@ -181,8 +181,8 @@ This Will open a streamlit application where you can ask your questions and get 
 ![sample2](https://github.com/user-attachments/assets/b0d2ffbb-6b32-4092-96fb-93fdfe8a57f2)
 
 ## Future Enhancements
-- Deploy the Appication
-- RAGAS Evaluation Framework to evaluate the RAG Performance.
+- Deploy the Application
+- RAG Performance valuation by RAGAS.
 
 **for more details**
 Happy to Connect!! [Samiksha Kolhe](https://www.linkedin.com/in/samiksha-kolhe25701/)
