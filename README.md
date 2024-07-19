@@ -176,7 +176,9 @@ This Will open a streamlit application where you can ask your questions and get 
 
 ## Sample Output
 
+![sample1](https://github.com/user-attachments/assets/1edb60e5-f451-426b-a703-8fc99e73e66c)
 
+![sample2](https://github.com/user-attachments/assets/b0d2ffbb-6b32-4092-96fb-93fdfe8a57f2)
 
 ## Future Enhancements
 - Deploy the Appication
