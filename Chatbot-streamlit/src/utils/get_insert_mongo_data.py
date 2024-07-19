@@ -1,4 +1,5 @@
 from .mongo_init import get_database
+import os
 
 CONNECTION_STRING = os.getenv('CONNECTION_STRING')
 

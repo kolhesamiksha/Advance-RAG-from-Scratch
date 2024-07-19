@@ -1,4 +1,5 @@
 from pymongo import MongoClient
+import os
 
 CONNECTION_STRING = os.getenv('CONNECTION_STRING')
 
