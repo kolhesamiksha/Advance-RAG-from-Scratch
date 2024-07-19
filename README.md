@@ -87,7 +87,7 @@ The approaches Followed for building RAG pipeline is discussed below
 This Application is Not yet deployed.. In-progress.
 
 Follow Below Instruction for smooth and Errorless Application Run
-1. **Setup the Virtual-env
+**Setup the Virtual-env**
 
     ```
     conda create --name ragapp python=3.11.5
@@ -97,9 +97,10 @@ Follow Below Instruction for smooth and Errorless Application Run
     pip install -r requirements.txt
 
 **Setup the API Backend**
-To Run the Application Locally First Run the FastAPI backend. Follow Below **Instructions to Run the FastAPI**
 
-**Note: To add your credentials inside the Mongodb Atlas cloud to connect the application Refere: Chatbot-streamlit/src/utils/mongo_init.py
+To Run the Application Locally First Run the FastAPI backend. Follow Below Instructions to Run the FastAPI:
+
+**Note**: To add your credentials inside the Mongodb Atlas cloud to connect the application Refere: Chatbot-streamlit/src/utils/mongo_init.py
 
 1. Run the API
     ```
@@ -118,7 +119,8 @@ Now /predict Endpoint of FastAPI is getting exposed, which can be used in out St
     Click on the link e.g http://127.0.0.1:8000/docs to check the swagger
 
 **Setup the Streamlit UI**
-To Run the Streamlit Application Locally Follow below **Instructions to Run the App**
+
+To Run the Streamlit Application Locally Follow below Instructions to Run the App
 
     ```
     streamlit run app.py
@@ -127,5 +129,7 @@ This Will open a streamlit application where you can ask your questions and get 
 
 ## Sample Output
 
-Contact Info:
-__Samiksha Kolhe__: https://www.linkedin.com/in/samiksha-kolhe25701/ 
+
+
+**for more details**
+Happy to Connect!! [Samiksha Kolhe](https://www.linkedin.com/in/samiksha-kolhe25701/)
