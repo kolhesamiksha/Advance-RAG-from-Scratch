@@ -97,30 +97,29 @@ Follow Below Instruction for smooth and Errorless Application Run
     pip install -r requirements.txt
 ```
 
-**Setup the API Backend**
+#### Setup the API Backend
 
 To Run the Application Locally First Run the FastAPI backend. Follow Below Instructions to Run the FastAPI:
 
 **Note**: To add your credentials inside the Mongodb Atlas cloud to connect the application Refere: Chatbot-streamlit/src/utils/mongo_init.py
 
-1. Run the API
+- Run the API
     ```
     #Export Envs: After insderting daa into mongodb atlas cloud
     export CONNECTION_NAME=<chatbot-connection-name>
 
     #Now Run the FastAPI using below command and Relative Path as Chatbot-streamlit/
     uvicorn src.main:app --reload
-
-    
+ 
 Now /predict Endpoint of FastAPI is getting exposed, which can be used in out Streamlit app to do Q&A over RAG.
 
-2. Check the API working in swagger
+- Check the API working in swagger
 
 ```
     Click on the link e.g http://127.0.0.1:8000/docs to check the swagger
 ```
 
-**Setup the Streamlit UI**
+#### Setup the Streamlit UI
 
 To Run the Streamlit Application Locally Follow below Instructions to Run the App
 
