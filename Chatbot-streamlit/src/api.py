@@ -59,7 +59,7 @@ OPENAI_API_BASE = creds_mongo['OPENAI_API_BASE']
 ZILLIZ_CLOUD_URI = creds_mongo['ZILLIZ_CLOUD_URI']
 ZILLIZ_CLOUD_API_KEY = creds_mongo['ZILLIZ_CLOUD_API_KEY']
 
-COLLECTION_NAME= "advance_rag_sam"          #creds_mongo['COLLECTION_NAME']
+COLLECTION_NAME= "bold_sam"          #creds_mongo['COLLECTION_NAME']
 DENSE_EMBEDDING_MODEL = "jinaai/jina-embeddings-v2-base-en"
 SPARSE_EMBEDDING_MODEL = "Qdrant/bm42-all-minilm-l6-v2-attentions"
 LLM_MODEL = "gpt-4o"
@@ -133,17 +133,17 @@ def Self_query_retrieval(question):
             type="string",
         ),
         AttributeInfo(
-            name="prechunk",
+            name="author_name",
             description="the local file path of the file.",
             type="string",
         ),
         AttributeInfo(
-            name="postchunk",
+            name="related_topics",
             description="Total number of files pages present inside the file.",
             type="array",
         ),
         AttributeInfo(
-            name="section_id", 
+            name="pdf_links", 
             description="The year the file was released or published.", 
             type="array"
         ),
@@ -189,16 +189,17 @@ def milvus_hybrid_search(question, expr):
     dense_q = AnnSearchRequest(dense_question_emb, "dense_vector", DENSE_SEARCH_PARAMS, limit=3) #expr
 
     res = milvus_collection.hybrid_search([sparse_q, dense_q], rerank=RRFRanker(), limit=6,
-            output_fields=["source_link", "text", "prechunk", "postchunk", "section_id"]  # Include title field in result
+            output_fields=["source_link", "text", "author_name", "related_topics", "pdf_links"]  # Include title field in result
         )
+    print(f"Hybrid Search Result: {res}")
     for _, hits in enumerate(res):
         for hit in hits:
             page_content = hit.entity.get("text")
             metadata = {
                 "source_link": hit.entity.get("source_link"),
-                "prechunk": hit.entity.get("prechunk"),
-                "postchunk": hit.entity.get("postchunk"),
-                "section_id": hit.entity.get("section_id")
+                "author_name": hit.entity.get("author_name"),
+                "related_topics": hit.entity.get("related_topics"),
+                "pdf_links": hit.entity.get("pdf_links")
                 }
             doc_chunk = Document(page_content=page_content, metadata=metadata)
             output.append(doc_chunk)
